@@ -57,3 +57,42 @@ export const GAMES: Game[] = [
         category: 'Exploration / Déduction'
     }
 ];
+
+export interface Impression {
+    id: string;
+    author: string;
+    text: string;
+    mood: string; // e.g., 'Aventure', 'Détente', 'Frisson'
+    avatar?: string;
+}
+
+export const IMPRESSIONS: Impression[] = [
+    {
+        id: '1',
+        author: 'Sophie T.',
+        text: "Une expérience incroyable ! J'ai adoré l'immersion dans la forêt. On s'y croirait vraiment.",
+        mood: 'Aventure',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150'
+    },
+    {
+        id: '2',
+        author: 'Marc D.',
+        text: "Le matériel est de super qualité. Les figurines sont magnifiques et le gameplay est très fluide.",
+        mood: 'Stratégie',
+        avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150'
+    },
+    {
+        id: '3',
+        author: 'Lucie & Thomas',
+        text: "Parfait pour une soirée en couple. On a beaucoup ri et on a hâte de tester les autres scénarios.",
+        mood: 'Fun',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150'
+    },
+    {
+        id: '4',
+        author: 'Alexandre B.',
+        text: "Un vrai défi ! Les énigmes sont corsées mais logiques. Je recommande aux amateurs de casse-tête.",
+        mood: 'Challenge',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150'
+    }
+];

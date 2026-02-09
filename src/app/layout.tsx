@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import { CartProvider } from "@/lib/CartContext";
+import { I18nProvider } from "@/lib/I18nContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,10 +48,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white flex flex-col`}
       >
         <CartProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <CookieBanner />
+          <I18nProvider>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <CookieBanner />
+          </I18nProvider>
         </CartProvider>
       </body>
     </html>
