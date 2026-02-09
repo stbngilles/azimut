@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { GAMES } from '@/lib/constants'
 import { ArrowRight, MapPin, Star, Users, Gamepad2, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/lib/CartContext'
+import { useI18n } from '@/lib/I18nContext'
 
 export default function Home() {
   const { addToCart } = useCart()
+  const { t } = useI18n()
 
   return (
     <div className="space-y-24 pb-24">
@@ -27,28 +29,23 @@ export default function Home() {
 
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto space-y-10">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full text-indigo-200 text-sm font-bold uppercase tracking-widest animate-pulse">
-            <Star size={16} className="text-orange-400" /> Nouvel Azimut
+            <Star size={16} className="text-orange-400" /> {t.hero.badge}
           </div>
           <h1 className="text-6xl md:text-8xl font-black text-white leading-tight tracking-tighter">
-            L'AVENTURE <br />
-            <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-indigo-400 bg-clip-text text-transparent">N'A PAS DE LIMITE</span>
+            {t.hero.title} <br />
+            <span className="bg-gradient-to-r from-orange-400 via-yellow-400 to-indigo-400 bg-clip-text text-transparent">{t.hero.titleAccent}</span>
           </h1>
           <p className="text-xl md:text-2xl text-indigo-100 font-medium max-w-2xl mx-auto leading-relaxed">
-            Azimut Games crée des univers immersifs où chaque partie est une nouvelle exploration. Prêt à nous rejoindre ?
+            {t.hero.subtitle}
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/jeux"
               className="px-10 py-5 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-black text-xl transition-all hover:scale-105 shadow-2xl shadow-orange-500/40 flex items-center gap-3 group"
             >
-              Explorer les Mondes <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+              {t.hero.cta} <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-        </div>
-
-        {/* Decorative Compass Overlay (Bottom Left) */}
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 opacity-10 pointer-events-none rotate-12">
-          <Image src="https://img.icons8.com/plasticine/400/compass.png" alt="compass deco" fill className="object-contain" />
         </div>
       </section>
 
@@ -56,13 +53,13 @@ export default function Home() {
       <section id="jeux" className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
-            <h2 className="text-4xl font-black text-gray-900 mb-4">Nos Incontournables</h2>
+            <h2 className="text-4xl font-black text-gray-900 mb-4">{t.featured.title}</h2>
             <p className="text-gray-600 text-lg max-w-md">
-              Que vous soyez fan de fantaisie, de rétro ou de stratégie, nous avons le jeu qu'il vous faut.
+              {t.featured.subtitle}
             </p>
           </div>
           <Link href="/jeux" className="text-indigo-600 font-bold flex items-center gap-2 hover:gap-3 transition-all underline decoration-2 underline-offset-4">
-            Voir tout le catalogue <ArrowRight size={20} />
+            {t.featured.viewAll} <ArrowRight size={20} />
           </Link>
         </div>
 
@@ -88,12 +85,12 @@ export default function Home() {
                     href={`/jeux#${game.slug}`}
                     className="flex-grow text-center py-3 bg-indigo-50 text-indigo-700 rounded-2xl font-bold hover:bg-indigo-600 hover:text-white transition-all"
                   >
-                    Découvrir
+                    {t.featured.discover}
                   </Link>
                   <button
                     onClick={() => addToCart(game)}
                     className="p-3 border-2 border-indigo-100 text-indigo-600 rounded-2xl hover:border-indigo-600 transition-all active:scale-95"
-                    title="Ajouter au panier"
+                    title={t.featured.addToCart}
                   >
                     <ShoppingBag size={24} />
                   </button>
@@ -119,17 +116,17 @@ export default function Home() {
           </div>
           <div className="space-y-8 text-center md:text-left">
             <h2 className="text-4xl md:text-6xl font-black leading-tight text-gray-900">
-              Suivez le guide <span className="text-orange-500">Azi</span> !
+              {t.mascot.title} <span className="text-orange-500">{t.mascot.titleAccent}</span> !
             </h2>
             <p className="text-xl text-gray-600 font-medium">
-              Plus qu'une simple icône, Azi est votre guide dans chacun de nos univers. Fun, dynamique et toujours prêt à vous orienter vers de nouveaux défis !
+              {t.mascot.description}
             </p>
             <div className="pt-4">
               <Link
                 href="/mascotte"
                 className="inline-block px-10 py-5 bg-indigo-600 text-white rounded-full font-black text-lg hover:bg-orange-500 transition-all transform hover:-translate-y-1 shadow-xl shadow-indigo-500/20"
               >
-                Découvrir l'histoire
+                {t.mascot.cta}
               </Link>
             </div>
           </div>
@@ -142,15 +139,15 @@ export default function Home() {
         <div className="bg-orange-500 rounded-[3rem] p-12 text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-24 -mt-24 group-hover:scale-125 transition-transform duration-500"></div>
           <div className="relative z-10 space-y-6">
-            <h2 className="text-4xl font-black italic">Collection Azimut</h2>
+            <h2 className="text-4xl font-black italic">{t.blocks.collection.title}</h2>
             <p className="text-orange-100 text-lg">
-              Portez fièrement nos couleurs avec notre collection de t-shirts, pulls et casquettes d'explorateur.
+              {t.blocks.collection.description}
             </p>
             <Link
               href="/goodies"
               className="inline-flex items-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-full font-bold hover:shadow-2xl transition-all"
             >
-              Aller vers le Shop <ShoppingBag size={20} />
+              {t.blocks.collection.cta} <ShoppingBag size={20} />
             </Link>
           </div>
         </div>
@@ -159,15 +156,15 @@ export default function Home() {
         <div className="bg-indigo-600 rounded-[3rem] p-12 text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-64 h-64 bg-black opacity-10 rounded-full -mr-24 -mt-24 group-hover:scale-125 transition-transform duration-500"></div>
           <div className="relative z-10 space-y-6">
-            <h2 className="text-4xl font-black italic">Rejoignez l'expédition</h2>
+            <h2 className="text-4xl font-black italic">{t.blocks.expedition.title}</h2>
             <p className="text-indigo-100 text-lg">
-              Devenez ambassadeur Azimut et partagez votre passion avec votre communauté de baroudeurs.
+              {t.blocks.expedition.description}
             </p>
             <Link
               href="/ambassadeur"
               className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-4 rounded-full font-bold hover:shadow-2xl transition-all"
             >
-              Devenir Ambassadeur <Users size={20} />
+              {t.blocks.expedition.cta} <Users size={20} />
             </Link>
           </div>
         </div>
@@ -179,9 +176,9 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center space-y-16 relative z-10">
           <div className="max-w-3xl mx-auto space-y-6">
             <div className="w-20 h-1 bg-orange-500 mx-auto rounded-full"></div>
-            <h2 className="text-5xl font-black text-white italic">Où nous trouver ?</h2>
+            <h2 className="text-5xl font-black text-white italic">{t.venues.title}</h2>
             <p className="text-indigo-100/60 text-xl font-medium italic">
-              Bars, boutiques, ludothèques... Votre prochaine aventure est plus proche que vous ne le pensez.
+              {t.venues.subtitle}
             </p>
           </div>
 
@@ -190,22 +187,22 @@ export default function Home() {
               <div className="w-20 h-20 bg-orange-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 rotate-3 group-hover:rotate-0 transition-transform">
                 <MapPin size={40} />
               </div>
-              <h3 className="text-2xl font-black text-white italic">Points de Vente</h3>
-              <p className="text-indigo-100/40 font-medium">Trouvez la boutique de jeux la plus proche de chez vous pour repartir avec votre boîte.</p>
+              <h3 className="text-2xl font-black text-white italic">{t.venues.points.title}</h3>
+              <p className="text-indigo-100/40 font-medium">{t.venues.points.description}</p>
             </div>
             <div className="bg-white/5 backdrop-blur-lg p-10 rounded-[3rem] border border-white/10 space-y-6 hover:bg-white/10 transition-all group lg:-translate-y-4">
               <div className="w-20 h-20 bg-indigo-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 -rotate-3 group-hover:rotate-0 transition-transform">
                 <Gamepad2 size={40} />
               </div>
-              <h3 className="text-2xl font-black text-white italic">Lieux de Jeu</h3>
-              <p className="text-indigo-100/40 font-medium">Testez nos jeux en conditions réelles dans nos bars et ludothèques partenaires.</p>
+              <h3 className="text-2xl font-black text-white italic">{t.venues.places.title}</h3>
+              <p className="text-indigo-100/40 font-medium">{t.venues.places.description}</p>
             </div>
             <div className="bg-white/5 backdrop-blur-lg p-10 rounded-[3rem] border border-white/10 space-y-6 hover:bg-white/10 transition-all group">
               <div className="w-20 h-20 bg-purple-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 rotate-6 group-hover:rotate-0 transition-transform">
                 <Star size={40} />
               </div>
-              <h3 className="text-2xl font-black text-white italic">Événements</h3>
-              <p className="text-indigo-100/40 font-medium">Ne manquez pas nos soirées démo, tournois officiels et rencontres créateurs.</p>
+              <h3 className="text-2xl font-black text-white italic">{t.venues.events.title}</h3>
+              <p className="text-indigo-100/40 font-medium">{t.venues.events.description}</p>
             </div>
           </div>
 
@@ -213,7 +210,7 @@ export default function Home() {
             href="/lieux"
             className="inline-flex items-center gap-3 px-12 py-6 bg-white text-[#132a24] rounded-full font-black text-xl hover:bg-orange-500 hover:text-white transition-all shadow-2xl shadow-indigo-500/10 group active:scale-95"
           >
-            Voir la carte interactive <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            {t.venues.cta} <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </section>
